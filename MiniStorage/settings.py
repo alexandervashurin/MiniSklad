@@ -25,7 +25,7 @@ SECRET_KEY = 'aa-%_&-&vu64d1-kl$@qwvd91*lk)z%-yy+512f3n@!vvfttfz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -75,12 +75,18 @@ WSGI_APPLICATION = 'MiniStorage.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'sklad',
+        'USER': 'adminsklad',
+        'PASSWORD': 'squareformula',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

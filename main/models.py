@@ -26,6 +26,7 @@ class BaseDataModel(models.Model):
 class Product(BaseDataModel):
     title = models.CharField(max_length=200, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание', null=True, blank=True, default='')
+    inventory_number = models.CharField(max_length=100, verbose_name='инв.№', default="")
     price = models.IntegerField(verbose_name='Цена')
 
     def __str__(self):
@@ -40,16 +41,17 @@ class Product(BaseDataModel):
 class Contractor(BaseDataModel):
     INDIVIDUAL = 'individual'
     ENTITY = 'entity'
-    INN = ''
+    IOGV = 'IOGV'
 
     CONTRACTOR_CATEGORY = (
         (INDIVIDUAL, 'Физическое лицо'),
         (ENTITY, 'Юридическое лицо'),
-        (INN, 'Индивидуальный номер налогоплательщика')
+        (IOGV, 'орган государственной власти'),
     )
-
-    title = models.CharField(max_length=200, verbose_name='Наименование')
-    category = models.CharField(max_length=20, choices=CONTRACTOR_CATEGORY, verbose_name='Категория')
+    inn = models.CharField(max_length=12, unique=True, verbose_name="ИНН")
+    title = models.CharField(max_length=200, verbose_name='Наименование ЮЛ/ФИО ФЛ')
+    category = models.CharField(max_length=20, choices=CONTRACTOR_CATEGORY, verbose_name='Категория Контрагента')
+    address = models.TextField(verbose_name="Юридический адрес, контактный телефон", default="  ")
 
     def __str__(self):
         return '{number:<10}|{title}'.format(number=self.pk, title=self.title)

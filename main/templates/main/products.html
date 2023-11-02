@@ -15,6 +15,7 @@
                 <th column-key="id" display-name="Номер">Номер</th>
                 <th column-key="title" display-name="Наименование">Наименование</th>
                 <th column-key="description" display-name="Описание">Описание</th>
+                <th column-key="inventory_number" display-name="Инв. №">Инвентарный номер</th>
                 <th column-key="price" display-name="Цена">Цена</th>
                 <th column-key="dt_created" display-name="Дата создания">Дата создания</th>
                 <th column-key="dt_updated" display-name="Дата изменения">Дата изменения</th>
@@ -42,6 +43,7 @@
                     Цена: <br><input type="text" name="product-price" id="product-price" value="0" required><br><br>
                     Наименование:<br><input type="text" name="product-title" id="product-title" value=""
                                             required><br><br>
+                    Инв №: <br><input type="text" name="product-inventory_number" id="product-inventory_number" value="" required><br><br>
                     Описание:<br><textarea name="product-description" id="product-description"></textarea><br><br>
                     Пометить на удаление: <input type="checkbox" name="product-to-remove" id="product-to-remove">
                 </fieldset>
@@ -94,6 +96,7 @@
                         $tableRow.append($("<td>").text(product.id));
                         $tableRow.append($("<td>").text(product.title));
                         $tableRow.append($("<td>").text(product.description));
+                        $tableRow.append($("<td>").text(product.inventory_number));
                         $tableRow.append($("<td>").text(product.price));
                         $tableRow.append($("<td>").text(product.dt_created));
                         $tableRow.append($("<td>").text(product.dt_updated));
@@ -122,6 +125,7 @@
             $("#product-dt-updated").text(selectedProduct.dt_updated);
             $("#product-title").val(selectedProduct.title);
             $("#product-description").text(selectedProduct.description);
+            $("#product-inventory_number").text(selectedProduct.inventory_number);
             $("#product-price").val(selectedProduct.price);
             $("#product-to-remove").prop("disabled", false);
             $("#product-to-remove").prop("checked", selectedProduct.to_remove);
@@ -142,6 +146,7 @@
                     "data": {
                         "title": $("#product-title").val(),
                         "description": $("#product-description").val(),
+                        "inventory_number": $("#product-inventory_number").val(),
                         "price": $("#product-price").val(),
                         "to_remove": $("#product-to-remove:checked").val() ? true : false
                     },
@@ -152,6 +157,7 @@
                         $row.append($("<td>").text(data.id));
                         $row.append($("<td>").text(data.title));
                         $row.append($("<td>").text(data.description));
+                        $row.append($("<td>").text(data.inventory_number));
                         $row.append($("<td>").text(data.price));
                         $row.append($("<td>").text(data.dt_created));
                         $row.append($("<td>").text(data.dt_updated));
@@ -175,6 +181,7 @@
             $("#product-dt-updated").text("-");
             $("#product-title").val("");
             $("#product-description").text("");
+            $("#product-inventory_number").text("");
             $("#product-price").val("0");
             $("#product-to-remove").prop("disabled", true);
             $("#product-to-remove").prop("checked", false);
@@ -193,6 +200,7 @@
                     "data": {
                         "title": $("#product-title").val(),
                         "description": $("#product-description").val(),
+                        "inventory_number": $("#product-inventory_number").val(),
                         "price": $("#product-price").val()
                     },
                     "success": function (data) {

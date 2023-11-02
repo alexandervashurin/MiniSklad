@@ -11,15 +11,16 @@ def action(count=None, file_path=None):
     sheet = work_book.get_sheet_by_name('data')
 
     data = []
-    row = 2
+    row = 3
     while True:
         if count is not None and row > count:
             break
         title = sheet.cell(row=row, column=1).value
-        price = sheet.cell(row=row, column=2).value
+        inventory_number = sheet.cell(row=row, column=2).value
+        price = sheet.cell(row=row, column=3).value
         if not title:
             break
-        data.append(Product(title=title, price=price))
+        data.append(Product(title=title, price=price, inventory_number=inventory_number))
         row += 1
 
     Product.objects.bulk_create(data)
